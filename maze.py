@@ -37,6 +37,12 @@ class Player(GameSprite):
         if keys_pressed[K_RIGHT] and self.rect.x < win_width-690:
             self.rect.x+=self.speed
 
+class Enemy(GameSprite):
+    def update(self):
+        if self.rect.x <= 470:
+            self.direction = "right"
+        if self.direction == "right":
+            self.rect.x += self.speed
 player=Player("hero.png", 5, 50, 250)
 
 FPS=60
