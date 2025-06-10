@@ -116,9 +116,9 @@ wall7=Wall("wall.jpg", 80, 20, 360, 200)
 wall8=Wall("wall.jpg", 80, 20, 120, 200)
 treasure=Treasure("treasure_chest.png", 800, 450)
 coin1=Coin("coin.png", 50, 450)
-coin2=Coin("coin.png", 320, 35) #320 35
-coin3=Coin("coin.png", 950, 15) #950 15
-#CHASE = 500 = x
+coin2=Coin("coin.png", 320, 35)
+coin3=Coin("coin.png", 950, 15)
+
 FPS=60
 clock=time.Clock()
 game = True
@@ -129,9 +129,6 @@ while game:
             quit()
             sys.exit()
     window.blit(background, (0, 0))
-    if finish == True:
-        time.wait(2500)
-        break
     if finish != True:
         GameSprite.reset(player)
         GameSprite.reset(enemy)
@@ -151,6 +148,13 @@ while game:
         wall6.draw_wall()
         wall7.draw_wall()
         wall8.draw_wall()
+        if coins_collected <= 3:
+            fontinstr=font.SysFont(None, 20)
+            textinstr=fontinstr.render("Зберіть усі монети, щоб відкрити скарб!"), 1, (255, 255, 255)
+            window.blit(textinstr, (0, 0))
+    else:
+        time.wait(2500)
+        break
     if player.rect.colliderect(enemy.rect) or player.rect.colliderect(wall1) or player.rect.colliderect(wall2) or player.rect.colliderect(wall3) or player.rect.colliderect(wall4) or player.rect.colliderect(wall5):
         fontdefeat=font.SysFont(None, 140)
         textdefeat=fontdefeat.render("YOU LOSE!", 1, (200, 0, 0))
